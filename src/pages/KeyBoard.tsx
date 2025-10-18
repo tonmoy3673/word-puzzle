@@ -1,5 +1,11 @@
 import "./KeyBoard.css";
 
+interface KeyBoardType {
+  activeLetters: string[];
+  inactiveLetters: string[];
+  addGuessedLetter: (letter: string) => void;
+  disabled?:boolean;
+}
 const KEYS = [
   "a",
   "b",
@@ -29,8 +35,7 @@ const KEYS = [
   "z",
 ];
 
-const KeyBoard = () => {
-    
+const KeyBoard = ({ activeLetters, inactiveLetters, addGuessedLetter,disabled=false }:KeyBoardType) => {
   return (
     <div
       style={{
@@ -39,12 +44,15 @@ const KeyBoard = () => {
         gap: ".5rem",
       }}
     >
-        {
-            KEYS.map(key =>{
-                return <button  className="btn" key={key}>{key}</button>
-            })
-        }
-     
+      {KEYS.map((key) => {
+        const isActive = activeLetters.includes(key);
+        const isInActive = inactiveLetters.includes(key);
+        return (
+          <button  disabled={isInActive || isActive || disabled} onClick={()=>addGuessedLetter(key)} className={`btn ${isActive ? "active" : isInActive ? "inactive" : ""}`} key={key}>
+            {key}
+          </button>
+        );
+      })}
     </div>
   );
 };
