@@ -10,7 +10,8 @@ const getWord = () => {
 
 const Home = () => {
   const [wordToGuess, setWordToGuess] = useState(getWord);
-  const [gussedLetters, setGussedLetters] = useState<string[]>([]);
+  const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
+  const incorrectLetters = guessedLetters.filter(letter => !wordToGuess.includes(letter))
   console.log(wordToGuess);
 
   return (
@@ -21,20 +22,25 @@ const Home = () => {
         flexDirection: "column",
         gap: "2rem",
         margin: "0 auto",
-        alignItems:"center"
+        alignItems:"center",
+         padding:"0 10px",
+         
+       
       }}
-      className=""
+      
     >
       {/* ============= result text ======= */}
       <div style={{ fontSize: "2rem", textAlign: "center" }}>Lose Win</div>
       {/* ============ HangmanDrawing ============ */}
-      <HangmanDrawing />
+      <HangmanDrawing numberOfGuesses = {incorrectLetters.length}/>
 
       {/* ================= HangmanWord ============== */}
       <HangmanWord />
 
       {/* ================== KeyBoard ============= */}
-      <KeyBoard />
+     <div style={{alignSelf:"stretch"}}>
+         <KeyBoard />
+     </div>
     </div>
   );
 };

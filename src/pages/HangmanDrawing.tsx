@@ -37,12 +37,11 @@ const RightARM = (
       position: "absolute",
       right: "-95px",
       top: "150px",
-      rotate:"-30deg",
-      transformOrigin:"left bottom"
+      rotate: "-30deg",
+      transformOrigin: "left bottom",
     }}
   />
 );
-
 
 // =============== LeftARM ===========/
 const LeftARM = (
@@ -54,12 +53,11 @@ const LeftARM = (
       position: "absolute",
       right: "10px",
       top: "148px",
-      rotate:"30deg",
-      transformOrigin:"right bottom"
+      rotate: "30deg",
+      transformOrigin: "right bottom",
     }}
   />
 );
-
 
 // =============== RightLeg ===========/
 const RightLeg = (
@@ -71,8 +69,8 @@ const RightLeg = (
       position: "absolute",
       right: "-90px",
       top: "190px",
-      rotate:"60deg",
-      transformOrigin:"left bottom"
+      rotate: "60deg",
+      transformOrigin: "left bottom",
     }}
   />
 );
@@ -87,30 +85,20 @@ const LeftLeg = (
       position: "absolute",
       right: "0",
       top: "190px",
-      rotate:"-60deg",
-      transformOrigin:"right bottom"
+      rotate: "-60deg",
+      transformOrigin: "right bottom",
     }}
   />
 );
 
-
-const HangmanDrawing = () => {
+const HangmanParts = [Head, Body, RightARM, LeftARM, RightLeg, LeftLeg];
+interface HangmanDrawingType {
+  numberOfGuesses: number;
+}
+const HangmanDrawing = ({ numberOfGuesses }: HangmanDrawingType) => {
   return (
     <div style={{ position: "relative" }}>
-      {/* ============= head =========== */}
-      {Head}
-      {/* =============== body =========== */}
-      {Body}
-      {/* ============= RightARM =========== */}
-         {RightARM}
-      {/* ================ LeftARM ============= */}
-      {LeftARM}
-     {/* =============== RightLeg ========== */}
-     {RightLeg}
-
-     {/* ======= LeftLeg ======= */}
-     {LeftLeg}
-
+      {HangmanParts.slice(0, numberOfGuesses)}
       <div
         style={{
           height: "50px",
@@ -124,7 +112,7 @@ const HangmanDrawing = () => {
       <div
         style={{
           height: "10px",
-          width: "200px",
+          width: "160px",
           background: "black",
           marginLeft: "120px",
           borderBottomRightRadius: "6px",
