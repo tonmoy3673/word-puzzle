@@ -20,13 +20,12 @@ const Home = () => {
     .every((letter) => guessedLetters.includes(letter));
   console.log(wordToGuess);
 
- const addGuessedLetter = useCallback((letter: string) => {
-  setGuessedLetters(prev => {
-    if (prev.includes(letter)) return prev;
-    return [...prev, letter];
-  });
-}, []);
-
+  const addGuessedLetter = useCallback((letter: string) => {
+    setGuessedLetters((prev) => {
+      if (prev.includes(letter)) return prev;
+      return [...prev, letter];
+    });
+  }, []);
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -50,14 +49,36 @@ const Home = () => {
         margin: "0 auto",
         alignItems: "center",
         padding: "5px 10px",
-        
+
         boxSizing: "border-box",
-        justifyContent: "center"
+        justifyContent: "center",
       }}
     >
       {/* ============= result text ======= */}
-      <div style={{ fontSize: "1.5rem", textAlign: "center",fontWeight: "bold", color:"green" }}>
-        {isWinner && "Winner!"} {isLoser && "Lose! - Nice Try!"}
+      <div
+        style={{
+          fontSize: "1.5rem",
+          textAlign: "center",
+          fontWeight: "bold",
+          color: "green",
+          display: "flex",
+          gap: "7px",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        {isWinner && " 😊 Winner!"} {isLoser && "😃 Lose! - Nice Try!"}
+        <button
+          style={{
+            backgroundColor: "hsl(200, 100%, 50%)",
+            color: "white",
+            border: "1px solid hsl(200, 100%, 50%)",
+            borderRadius: "6px",
+            padding: "4px 7px",
+          }}
+        >
+          Refresh
+        </button>
       </div>
       {/* ============ HangmanDrawing ============ */}
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
