@@ -40,7 +40,7 @@ const KeyBoard = ({ activeLetters, inactiveLetters, addGuessedLetter,disabled=fa
     <div
       style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fit,minmax(75px,1fr))",
+        gridTemplateColumns: "repeat(auto-fit,minmax(50px,1fr))",
         gap: ".5rem",
       }}
     >

@@ -46,14 +46,17 @@ const Home = () => {
         maxWidth: "800px",
         display: "flex",
         flexDirection: "column",
-        gap: "2rem",
+        gap: "1rem",
         margin: "0 auto",
         alignItems: "center",
-        padding: "0 10px",
+        padding: "5px 10px",
+        
+        boxSizing: "border-box",
+        justifyContent: "center"
       }}
     >
       {/* ============= result text ======= */}
-      <div style={{ fontSize: "2rem", textAlign: "center" }}>
+      <div style={{ fontSize: "1.5rem", textAlign: "center",fontWeight: "bold", color:"green" }}>
         {isWinner && "Winner!"} {isLoser && "Lose! - Nice Try!"}
       </div>
       {/* ============ HangmanDrawing ============ */}
