@@ -3,6 +3,7 @@ import words from "../../word.json";
 import HangmanDrawing from "../pages/HangmanDrawing";
 import HangmanWord from "../pages/HangmanWord";
 import KeyBoard from "../pages/KeyBoard";
+import { RefreshCcwDot } from "lucide-react";
 
 const getWord = () => {
   return words[Math.floor(Math.random() * words.length)];
@@ -26,6 +27,13 @@ const Home = () => {
       return [...prev, letter];
     });
   }, []);
+
+  // ========= handleRestart ======//
+  const handleRestart=()=>{
+    setWordToGuess(getWord);
+    setGuessedLetters([]);
+    
+  }
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -68,17 +76,44 @@ const Home = () => {
         }}
       >
         {isWinner && " 😊 Winner!"} {isLoser && "😃 Lose! - Nice Try!"}
-        <button
-          style={{
-            backgroundColor: "hsl(200, 100%, 50%)",
-            color: "white",
-            border: "1px solid hsl(200, 100%, 50%)",
-            borderRadius: "6px",
-            padding: "4px 7px",
-          }}
-        >
-          Refresh
-        </button>
+        {/* ============ display restart button ======= */}
+        {
+          isWinner || isLoser ? (
+            <button
+            onClick={handleRestart}
+              style={{
+                backgroundColor: "hsl(200, 100%, 50%)",
+                color: "white",
+                border: "1px solid hsl(200, 100%, 50%)",
+                borderRadius: "6px",
+                padding: "4px 7px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "5px",
+                cursor: "pointer",
+              }}
+            >
+              <RefreshCcwDot size={17} /> Restart
+            </button>
+          ) : (<button
+            onClick={handleRestart}
+              style={{
+                backgroundColor: "hsl(200, 100%, 50%)",
+                color: "white",
+                border: "1px solid hsl(200, 100%, 50%)",
+                borderRadius: "6px",
+                padding: "4px 7px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "5px",
+                cursor: "pointer",
+              }}
+            >
+              <RefreshCcwDot size={17} /> Restart
+            </button>)
+        }
       </div>
       {/* ============ HangmanDrawing ============ */}
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
